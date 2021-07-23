@@ -11,7 +11,7 @@
 
 const Roles = require('../models/role');
 
-const { Usuario , Categoria }  = require('../models');
+const { Usuario , Categoria, Productos }  = require('../models');
 
 
 //const Categoria = require('../models/Categoria');
@@ -98,6 +98,30 @@ const esRoleValido = async(rol = '')=>{ // validando el role en la base de datos
 
 
 
+            const existeProductoPorId = async(id) =>{
+
+           
+                // const existeCategoria =  await Categoria.findById (id); 
+             
+                 const existeProducto = await Productos.findById(id)
+     
+     
+         
+                 if( !existeProducto ){ 
+         
+             
+                         
+                     throw new Error(`El id de este producto no existe  ${ id }`);
+             
+             
+             
+             
+                 }    }
+     
+
+
+
+
 
 
 
@@ -107,7 +131,8 @@ const esRoleValido = async(rol = '')=>{ // validando el role en la base de datos
         esRoleValido,
         emailExiste, 
         ExisteUsuarioporID, 
-        existeCategoriaPorId
+        existeCategoriaPorId,
+        existeProductoPorId 
 
 
 

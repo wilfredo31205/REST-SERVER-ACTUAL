@@ -28,10 +28,15 @@ class Server{
 
 
             this.path ={ // realizamos un arreglo de las rutas ya que si colocamos ruta tras ruta se veria un poco feo y desordenado el codigo 
-
-                usuarios: '/api/usuarios',
+    
                 auth : '/api/auth',
-                categorias : '/api/categorias'
+                buscar : '/api/buscar',
+                categorias : '/api/categorias',
+                productos : '/api/productos',
+                usuarios: '/api/usuarios',
+
+          
+
 
 
 
@@ -110,10 +115,26 @@ class Server{
         this.app.use(this.path.auth, require('../routes/auth')); // ruta de autenticacion
      
 
+        this.app.use(this.path.buscar, require('../routes/buscar'));
+
+
+        
+        this.app.use(this.path.categorias, require('../routes/categorias'));
+
+
+        this.app.use(this.path.productos, require('../routes/productos'));
+
+
+
         this.app.use(this.path.usuarios, require('../routes/Usuarios'));
 
 
-        this.app.use(this.path.categorias, require('../routes/categorias'));
+
+
+
+
+
+        
 
 
 
