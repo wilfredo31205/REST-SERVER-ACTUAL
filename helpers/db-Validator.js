@@ -11,10 +11,10 @@
 
 const Roles = require('../models/role');
 
-const Usuario  = require('../models/usuario');
+const { Usuario , Categoria }  = require('../models');
 
 
-//const Categorias = require('../models/Categoria');
+//const Categoria = require('../models/Categoria');
 
 
 
@@ -75,22 +75,25 @@ const esRoleValido = async(rol = '')=>{ // validando el role en la base de datos
 
 
 
-        // const ExisteCategoriaporID = async(id) =>{
+        const existeCategoriaPorId = async(id) =>{
 
            
-        //     const existeCategoria =  await Categorias.findById(id); 
+           // const existeCategoria =  await Categoria.findById (id); 
         
+            const existeCategoria = await Categoria.findById(id)
+
+
     
-        //     if( !existeCategoria){ 
+            if( !existeCategoria){ 
     
         
                     
-        //         throw new Error(`El id de esta categoria no existe  ${id}`);
+                throw new Error(`El id de esta categoria no existe  ${ id }`);
         
         
         
         
-        //     }    }
+            }    }
 
 
 
@@ -102,9 +105,9 @@ const esRoleValido = async(rol = '')=>{ // validando el role en la base de datos
     module.exports = {
 
         esRoleValido,
-        emailExiste,
+        emailExiste, 
         ExisteUsuarioporID, 
-       // ExisteCategoriaporID
+        existeCategoriaPorId
 
 
 

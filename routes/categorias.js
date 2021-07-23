@@ -10,10 +10,14 @@ const { ValidarCampos } = require('../middlewares/Validar-Campos');
 const { ObtenerCategoria} = require('../Controllers/Categorias');
 
 
+const {obtenerCategoria} = require('../Controllers/Categorias');
+
 
 const {crearCategoria} = require('../Controllers/Categorias');
 
 
+const {   existeCategoriaPorId } = require('../helpers/db-Validator');
+ 
 
 
 
@@ -37,14 +41,15 @@ router.get('/',ObtenerCategoria);
 // Obtener una categoria por id - publico
 router.get('/:id',[ 
 
+    check('id',' No es un id de Mongo ').isMongoId(),
 
-   // check('id').custom(existeCategoria)
+    
+    ValidarCampos,
 
-],(req,res) =>{
+    check('id').custom(existeCategoriaPorId)
 
-    res.json('get -api')
 
-});
+],obtenerCategoria);
 
 
 //  Crear categoria -privado - cualquier persona con un token valido 

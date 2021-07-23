@@ -16,7 +16,7 @@ const ObtenerCategoria = async(req, res = response )=>{
         Categoria.countDocuments(query),
         Categoria.find(query)
 
-            .populate('usuario','nombre')
+            .populate('usuario','Nombre')
      
             // populate se utiliza para hacer la relacion para que aparezca el nombre del usuario y toda la informacion del usuario para indicar quien fue que lo grabo 
         
@@ -129,7 +129,27 @@ const crearCategoria = async(req, res = response)=>{
 
 
 
+const obtenerCategoria = async(req, res = response)=>{
 
+    
+     // ObtenerCategoria  - populate { }  va a regresar el objeto de la categoria 
+
+
+        const { id } = req.params;
+
+
+        const categoria = await  Categoria.findById(id).populate('usuario', 'Nombre');
+
+
+
+        res.json(categoria)
+
+
+
+
+
+
+}
 
 
 
@@ -153,7 +173,8 @@ const crearCategoria = async(req, res = response)=>{
 module.exports = {
     
     crearCategoria,
-    ObtenerCategoria
+    ObtenerCategoria,
+    obtenerCategoria 
 
 
 }
