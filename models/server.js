@@ -5,6 +5,10 @@ const express = require('express')
 
 const cors = require('cors');
 
+
+const fileUpload = require('express-fileupload');
+
+
 const { dbConnection  } = require('../database/config');
 
 class Server{
@@ -34,6 +38,7 @@ class Server{
                 categorias : '/api/categorias',
                 productos : '/api/productos',
                 usuarios: '/api/usuarios',
+                upload: '/api/upload',
 
           
 
@@ -79,22 +84,20 @@ class Server{
             
 
                 // Cors
-
-
                 this.app.use(cors());
-
-
-
-
                 // Directorio publico 
-
                 this.app.use(express.static('public'));
 
-
                 // Lectura y parseo del body 
-
-
                 this.app.use(express.json()); // hace la misma funcion que body-parser para leer la informacion que viene de postman 
+
+
+                //Fileupload o carga de archivos 
+
+                this.app.use(fileUpload({
+                    useTempFiles : true,
+                    tempFileDir : '/tmp/'
+                }));
 
 
 
@@ -128,6 +131,8 @@ class Server{
 
         this.app.use(this.path.usuarios, require('../routes/Usuarios'));
 
+
+        this.app.use(this.path.upload, require('../routes/upload'));
 
 
 
